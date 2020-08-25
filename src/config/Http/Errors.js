@@ -11,6 +11,9 @@ const ErrorCodes = {
     400,
     10
   ),
+
+  /* CLIENT ERRORS */
+  EMAIL_ALREDY_EXISTS: new ObjectError('Esse E-mail já foi utilizado', 400, 20),
 };
 
 module.exports = ErrorCodes;

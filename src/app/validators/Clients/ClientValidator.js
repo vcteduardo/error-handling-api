@@ -12,8 +12,10 @@ class ClientValidator {
     switch (role) {
       case 'store':
         validationConfig = Yup.object().shape({
-          name: Yup.string().required(),
-          email: Yup.string().required(),
+          name: Yup.string(),
+          email: Yup.string()
+            .required()
+            .email(),
           address: Yup.object({
             zip_code: Yup.string().required(),
             street: Yup.string().required(),
@@ -26,13 +28,6 @@ class ClientValidator {
               .matches(/^([A-Za-z]){2}$/, 'País deve ter sigla de 2 caracteres')
               .required(),
           }),
-        });
-        break;
-
-      case 'update':
-        validationConfig = Yup.object().shape({
-          title: Yup.string(),
-          description: Yup.string(),
         });
         break;
     }

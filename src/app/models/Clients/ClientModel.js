@@ -4,6 +4,11 @@ const ClientModel = new Mongoose.Schema(
   {
     name: {
       type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
     },
     address: new Mongoose.Schema({
       zip_code: String,

@@ -20,7 +20,8 @@ class HttpResponseError {
       errorData = err.errorData || null;
     } else {
       errorMessage = err.error_message || String(err);
-      errorData = err.error_data || null;
+      errorData = err.error_data || err.errors || null;
+      errorCode = err.error_code || 0;
       responseCode = status;
     }
 
