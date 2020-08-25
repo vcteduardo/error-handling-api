@@ -1,7 +1,12 @@
-const Sample = require('../models/SampleModel');
-const SampleValidator = require('../validators/SampleValidator');
+const ClientValidator = require('../../validators/Clients/ClientValidator');
+const Client = require('../../models/Clients/ClientModel');
+const {
+  HttpResponseError,
+  HttpResponseSuccess,
+  ErrorCodes,
+} = require('../../helpers/Http/index');
 
-class SampleController {
+class ClientController {
   async index(req, res) {
     const response = await Sample.find();
 
@@ -16,19 +21,25 @@ class SampleController {
 
   async store(req, res) {
     try {
-      await SampleValidator(req.body, 'store')
+      const validator = await ClientValidator(req.body, 'store');
+      console.log(validator.error);
+      if (validator.error) throw validator.error;
 
-      const response = await Sample.create(req.body);
+      // const response = await Sample.create(req.body);
+
+      aa;
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      console.log(error);
+
+      return new HttpResponseError(res, error);
     }
   }
 
   async update(req, res) {
     try {
-      await SampleValidator(req.body, 'update')
+      await SampleValidator(req.body, 'update');
 
       const response = await Sample.findByIdAndUpdate(req.params.id, req.body);
 
@@ -45,4 +56,4 @@ class SampleController {
   }
 }
 
-module.exports = new SampleController();
+module.exports = new ClientController();
