@@ -23,7 +23,7 @@ class ClientController {
       });
     } catch (error) {
       console.log(error);
-
+      //Comentario
       return new HttpResponseError(res, error);
     }
   }
